@@ -1,0 +1,320 @@
+# UCASE      : PERPUSTAKAAN (PEMINJAMAN BUKU)
+# NAMA       : GRACIELLA CICILIA
+# STUDENT ID : JCDSOL-017-007
+
+
+# --- 0. GREETING ---
+from datetime import datetime
+waktu = datetime.now().hour
+greet = "Selamat Datang di Perpustakaan Purwadhika!"
+
+def Greetings():
+    if waktu < 12:
+        print(f"Selamat Pagi,\n{greet}\n")
+    elif waktu < 15:
+        print(f"Selamat Siang,\n{greet}\n")
+    elif waktu < 18:
+        print(f"Selamat Sore,\n{greet}\n")
+    else:
+        print(f"Selamat Malam,\n{greet}\n")
+
+
+# --- 1. MAIN MENU ---
+# --- Acticity List ---
+A = "Cari Buku"
+B = "Membership"
+C = "Pinjam Buku"
+D = "Kembalikan Buku"
+
+def Menu():
+    print(f"\nDaftar Kegiatan: \n A. {A} \n B. {B} \n C. {C} \n D. {D}")
+
+# --- MAIN MENU ---
+def Activities():
+    while True:
+      Action = input("\nPilih Kegiatan Hari Ini! (A/B/C/D): ")
+      if Action.lower() == "a":
+        print(f"\n{A}")
+        Part_A()
+      elif Action.lower() == "b":
+        print(f"\n{B}")
+        Part_B()
+      elif Action.lower() == "c":
+        print(f"\n{C}")
+        Part_C()
+      elif Action.lower() == "d":
+        print(f"\n{D}")
+        Part_D()
+      else:
+        print("\nPilihan Kegiatan Tidak Tersedia!")
+        break
+
+def Main_Menu():
+    Menu()
+    Activities()
+
+
+
+# --- A. READ MENU ---
+# --- Read Menu List ---
+A = "List Buku"
+AA = "Cari Judul"
+AAA = "Back to Activities List"
+
+def Menu_A():
+    print(f"\nDaftar Pilihan: \n 1. {A} \n 2. {AA} \n 3. {AAA}")
+
+
+# List Buku
+List_Buku = {
+    'B1': {"Judul": "Harry Potter and the Philosopher's Stone", "Pengarang": "J. K. Rowling", "Tahun Terbit": "1997", "ID Buku": "JR97", "Stock": 2},
+    'B2': {"Judul": "Harry Potter and the Chamber of Secrets", "Pengarang": "J. K. Rowling", "Tahun Terbit": "1998", "ID Buku": "JR98", "Stock": 1},
+    'B3': {"Judul": "Harry Potter and the Prisoner of Azkaban", "Pengarang": "J. K. Rowling", "Tahun Terbit": "1999", "ID Buku": "JR99", "Stock": 3},
+    'B4': {"Judul": "Harry Potter and the Goblet of Fire", "Pengarang": "J. K. Rowling", "Tahun Terbit": "2000", "ID Buku": "JR00", "Stock": 2},
+    'B5': {"Judul": "Harry Potter and the Order of the Phoenix", "Pengarang": "J. K. Rowling", "Tahun Terbit": "2003", "ID Buku": "JR03", "Stock": 1},
+    'B6': {"Judul": "Harry Potter and the Half-Blood Prince", "Pengarang": "J. K. Rowling", "Tahun Terbit": "2005", "ID Buku": "JR05","Stock" : 0},
+    'B7': {"Judul": "Harry Potter and the Deathly Hallows", "Pengarang": "J. K. Rowling", "Tahun Terbit": "2007", "ID Buku": "JR07","Stock" : 3},
+    'B8': {"Judul": "The Valley of Fear", "Pengarang": "Sir Arthur Conan Doyle", "Tahun Terbit": "1915", "ID Buku": "CD15","Stock" : 1},
+    'B9': {"Judul": "The Hound of the Baskervilles", "Pengarang": "Sir Arthur Conan Doyle", "Tahun Terbit": "1901", "ID Buku": "CD01","Stock" : 2},
+    'B10': {"Judul": "The Adventures of Sherlock Holmes", "Pengarang": "Sir Arthur Conan Doyle", "Tahun Terbit": "1892", "ID Buku": "CD92","Stock" : 1},
+    'B11': {"Judul": "The Hound of the Baskervilles", "Pengarang": "Sir Arthur Conan Doyle", "Tahun Terbit": "1902", "ID Buku": "CD02","Stock" : 2},
+    'B12': {"Judul": "The ABC Murders", "Pengarang": "Agatha Christie", "Tahun Terbit": "1936", "ID Buku": "AC36","Stock" : 3},
+    'B13': {"Judul": "Murder on the Orient Express", "Pengarang": "Agatha Christie", "Tahun Terbit": "1934", "ID Buku": "AC34","Stock" : 0},
+    'B14': {"Judul": "Pride and Prejudice", "Pengarang": "Jane Austen", "Tahun Terbit": "1813", "ID Buku": "JA13","Stock" : 2},
+    'B15': {"Judul": "Sense and Sensibility", "Pengarang": "Jane Austen", "Tahun Terbit": "1811", "ID Buku": "JA11","Stock" : 3},
+    'B16': {"Judul": "The Raven", "Pengarang": "Edgar Allan Poe", "Tahun Terbit": "1845", "ID Buku": "AP45","Stock" : 3},
+    'B17': {"Judul": "The Black Cat", "Pengarang": "Edgar Allan Poe", "Tahun Terbit": "1843", "ID Buku": "AP43","Stock" : 5}
+}
+
+# --- A1. LIST BUKU ---
+# Menampilkan semua list buku
+def A1():
+    print("\nDaftar Buku yang Tersedia:")
+    print("-" * 50)
+    for key, data in List_Buku.items():
+        print(f"{key}:")
+        print(f"Judul       : {data['Judul']}")
+        print(f"Pengarang   : {data['Pengarang']}")
+        print(f"Tahun Terbit: {data['Tahun Terbit']}")
+        print(f"ID Buku     : {data['ID Buku']}")
+        print(f"Stock       : {data['Stock']}")
+        print("-" * 50)
+
+# --- A2. CARI JUDUL ---
+#Mencari Judul Buku dengan keyword yang diberikan
+def A2(Judul):
+    found = False
+    for key, data in List_Buku.items():
+      if Judul.lower() in data['Judul'].lower():
+        print(f"{key}:")
+        print(f"Judul       : {data['Judul']}")
+        print(f"Pengarang   : {data['Pengarang']}")
+        print(f"Tahun Terbit: {data['Tahun Terbit']}")
+        print(f"ID Buku     : {data['ID Buku']}")
+        print(f"Stock       : {data['Stock']}")
+        print("-" * 50)
+        found = True
+    if not found:
+      print("Judul buku belum tersedia.")
+      Part_A()
+
+
+# --- MAIN A ---
+def Part_A():
+  while True:
+    Menu_A()
+    A_Choises = input("\nPilih Pilihan! (1/2/3): ")
+    if A_Choises == "1":
+      A1()
+    elif A_Choises == "2":
+      Judul = input("Masukkan Judul Buku: ")
+      A2(Judul)
+    elif A_Choises == "3":
+      Main_Menu()
+      break
+    else:
+      print("Pilihan Tidak Tersedia!")
+      Main_Menu()
+      continue
+
+
+# --- B. MEMBERSHIP ---
+#List Member
+Members = {
+    'M1': {"Nama": "Harry", "Alamat": "Jakarta Pusat", "Tahun Lahir": "1995", "Tahun Join": "2021", "ID Member": "2195HA"},
+    'M2': {"Nama": "Jane Doe", "Alamat": "Jakarta Barat", "Tahun Lahir": "1997", "Tahun Join": "2024", "ID Member": "2497JA"},
+    'M3': {"Nama": "Agatha Kim", "Alamat": "Jakarta Selatan", "Tahun Lahir": "1998", "Tahun Join": "2023", "ID Member": "2398AG"},
+    'M4': {"Nama": "Kattie", "Alamat": "Jakarta Utara", "Tahun Lahir": "2002", "Tahun Join": "2019", "ID Member": "1902KA"},
+}
+
+# --- B1. CEK MEMBER ---
+#Cek Detail Member yang telah terdaftar
+def B1():
+    ID_Member = input("\nMasukkan ID Member: ")
+    found = False
+    for key, data in Members.items():
+      if ID_Member.lower() == data['ID Member'].lower():
+        print("\nKamu telah terdaftar sebagai member dengan detail:")
+        print("-" * 50)
+        print(f"ID Member  : {data['ID Member']}")
+        print(f"Nama       : {data['Nama']}")
+        print(f"Alamat     : {data['Alamat']}")
+        print(f"Tahun Lahir: {data['Tahun Lahir']}")
+        print(f"Tahun Join : {data['Tahun Join']}")
+        print("-" * 50)
+        found = True
+        Main_Menu()
+        break
+    if not found:
+      print("\nKamu belum terdaftar sebagai member. Daftar Sekarang?")
+      Daftar = input("Ya/Tidak: ")
+      if Daftar.lower() == "ya":
+        B2()
+      else:
+        Main_Menu()
+
+# --- B2. MEMBER BARU ---
+#Menambahkan member baru
+def B2():
+    Nama = input("Masukkan Nama: ")
+    Alamat = input("Masukkan Alamat: ")
+    Tahun_Lahir = input("Masukkan Tahun Lahir: ")
+    Tahun_Join = str(datetime.now().year)
+    ID_Member = Tahun_Lahir[-2:] + Tahun_Join[-2:] + Nama[:2].upper()
+    Members[ID_Member] = {"Nama": Nama, "Alamat": Alamat, "Tahun Lahir": Tahun_Lahir, "Tahun Join": Tahun_Join, "ID Member": ID_Member}
+    print(f"\nKamu telah menjadi member dengan ID Member: {ID_Member}")
+    Main_Menu()
+
+# --- B3. HAPUS MEMBER ---
+#Menghapus member
+def B3():
+    ID_Member = input("\nMasukkan ID Member untuk menghapus: ")
+    found = False
+    for key, data in Members.items():
+      if ID_Member.lower() == data['ID Member'].lower():
+        Members.pop(key)
+        print("\nMember kamu telah dihapus. Terima kasih telah menjadi member Perpustakaan Purwadhika!")
+        found = True
+        Main_Menu()
+    if not found:
+        print("\nMember tidak ditemukan.")
+        Coba= input("Coba Lagi?\nYes/No: ")
+        if Coba.lower() == "yes":
+          B3()
+        else:
+          Main_Menu()
+
+# --- MAIN B ---
+def Part_B():
+    print("\nApakah Kamu Member?")
+    Nama = input("\nMasukkan Nama untuk cek member: ")
+    found = False
+    for key, data in Members.items():
+      if Nama.lower() in data['Nama'].lower():
+        print(f"\nKamu telah terdaftar sebagai member dengan detail:\n")
+        print("-" * 50)
+        print(f"Nama       : {data['Nama']}")
+        print(f"ID Member  : {data['ID Member']}")
+        print("-" * 50)
+        Lanjut = input("\nLanjut?\n\"1\" untuk melihat detail member\n\"2\" untuk menghapus member\n\"3\" untuk kembali:\n ")
+        if Lanjut == "1":
+          B1()
+        elif Lanjut == "2":
+          B3()
+        else:
+          Main_Menu()
+          found = True
+          break
+    if not found:
+      print("\nKamu belum terdaftar sebagai member. Daftar sekarang?")
+      Daftar = input("Ya/Tidak: ")
+      if Daftar.lower() == "ya":
+        B2()
+      else:
+        Main_Menu()
+
+
+
+# --- C. PINJAM BUKU ---
+def Pinjam_Buku():
+    ID_Buku = input("Masukkan ID Buku: ")
+    found = False
+    for key, data in List_Buku.items():
+      if ID_Buku.lower() == data['ID Buku'].lower():
+        if data['Stock'] > 0:
+          data['Stock'] -= 1
+          print(f"\nBuku {data['Judul']} telah dipinjam. Sisa ketersediaan buku: {data['Stock']}")
+          found = True
+          Main_Menu()
+        else:
+          print("\nBuku telah habis dipinjam. Cari buku lainnya?")
+          Cari = input("Ya/Tidak: ")
+          if Cari.lower() == "ya":
+            Part_A()
+          else:
+            Main_Menu()
+            found = True
+            break
+    if not found:
+      print("\nBuku yang kamu cari belum ada. Cari buku lainnya?")
+      Cari = input("Ya/Tidak: ")
+      if Cari.lower() == "ya":
+        Part_A()
+      else:
+        Main_Menu()
+
+
+# --- MAIN C ---
+def Part_C():
+    ID_Member = input("Masukkan ID Member: ")
+    found = False
+    for key, data in Members.items():
+      if ID_Member.lower() == data['ID Member'].lower():
+        print(f"\nHi, {data['Nama']}!")
+        found = True
+        Pinjam_Buku()
+        break
+    if not found:
+      print("\nKamu belum terdaftar sebagai member. Daftar sekarang?")
+      Daftar = input("Ya/Tidak: ")
+      if Daftar.lower() == "ya":
+        B2()
+      else:
+        Main_Menu()
+
+
+
+# --- D. KEMBALIKAN BUKU ---
+def Kembalikan_Buku():
+    ID_Buku = input("Masukkan ID Buku: ")
+    found = False
+    for key, data in List_Buku.items():
+      if ID_Buku.lower() == data['ID Buku'].lower():
+        data['Stock'] += 1
+        print(f"\nBuku {data['Judul']} telah dikembalikan. Terima kasih telah mengembalikan {data['Judul']}.\nKetersediaan buku {data['Judul']} adalah {data['Stock']}.")
+        found = True
+        Main_Menu()
+        break
+    if not found:
+      print("\nID Buku yang kamu masukkan salah.")
+      Main_Menu()
+
+
+# --- MAIN D ---
+def Part_D():
+    ID_Member = input("Masukkan ID Member: ")
+    found = False
+    for key, data in Members.items():
+      if ID_Member.lower() == data['ID Member'].lower():
+        print(f"\nHi, {data['Nama']}")
+        found = True
+        Kembalikan_Buku()
+        break
+    if not found:
+      print("\nID Member yang kamu masukkan salah. Silahkan Cek Kembali.")
+      Main_Menu()
+
+
+# --- START PROGRAM ---
+Greetings()
+Main_Menu()
